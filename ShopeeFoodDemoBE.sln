@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopeeFood.API", "ShopeeFood.API\ShopeeFood.API.csproj", "{D2A319BC-1283-4698-BCD1-9FB795F59DC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopeeFood.Services", "ShopeeFood.Services\ShopeeFood.Services.csproj", "{421B81F5-755F-4F73-90FA-45928B515674}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopeeFood.Commons", "ShopeeFood.Commons\ShopeeFood.Commons.csproj", "{C3822D6B-618D-4B35-ADB2-DD272160993F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopeeFood.DAL", "ShopeeFood.DAL\ShopeeFood.DAL.csproj", "{1395DC32-1980-44D5-8621-40D73793427A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D2A319BC-1283-4698-BCD1-9FB795F59DC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2A319BC-1283-4698-BCD1-9FB795F59DC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2A319BC-1283-4698-BCD1-9FB795F59DC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2A319BC-1283-4698-BCD1-9FB795F59DC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{421B81F5-755F-4F73-90FA-45928B515674}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{421B81F5-755F-4F73-90FA-45928B515674}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{421B81F5-755F-4F73-90FA-45928B515674}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{421B81F5-755F-4F73-90FA-45928B515674}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3822D6B-618D-4B35-ADB2-DD272160993F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3822D6B-618D-4B35-ADB2-DD272160993F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3822D6B-618D-4B35-ADB2-DD272160993F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3822D6B-618D-4B35-ADB2-DD272160993F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1395DC32-1980-44D5-8621-40D73793427A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1395DC32-1980-44D5-8621-40D73793427A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1395DC32-1980-44D5-8621-40D73793427A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1395DC32-1980-44D5-8621-40D73793427A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A44AC0F8-D062-446F-897E-114F4B0057DD}
+	EndGlobalSection
+EndGlobal
