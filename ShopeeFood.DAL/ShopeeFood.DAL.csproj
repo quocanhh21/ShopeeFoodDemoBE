@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <Folder Include="EF\Extensions\" />
-    <Folder Include="EF\Configurations\" />
     <Folder Include="Models\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
