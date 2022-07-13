@@ -34,5 +34,7 @@ namespace ShopeeFood.DAL.EF.Entities
         public List<VoucherPartner> VoucherPartners { get; set; }
 
         public List<Order> Orders { get; set; }
+
+        public TypePartner TypePartner { get; set; }
     }
 }

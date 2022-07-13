@@ -17,6 +17,8 @@ namespace ShopeeFood.DAL.EF.Entities
 
         public string Description { get; set; }
 
+        public string Image { get; set; }
+
         public double? PercentDiscount { get; set; }
 
         public double? MaxDiscount { get; set; }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ShopeeFood.DAL.EF.Configurations;
 using ShopeeFood.DAL.EF.Entities;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,14 @@ namespace ShopeeFood.DAL.EF.Context
         public ShopeeFoodDbContext(DbContextOptions options): base(options)
         {
             
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new AppConfigConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderConfiguration());
+
+            //base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<AppConfig> AppConfigs { get; set; }

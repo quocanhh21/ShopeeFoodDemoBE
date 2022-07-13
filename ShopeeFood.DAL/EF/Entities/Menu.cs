@@ -18,5 +18,7 @@ namespace ShopeeFood.DAL.EF.Entities
         public Status Status { get; set; }
 
         public Partner Partner { get; set; }
+
+        public List<Item> Items { get; set; }
     }
 }

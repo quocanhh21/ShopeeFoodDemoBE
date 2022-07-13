@@ -25,7 +25,7 @@ namespace ShopeeFood.DAL.EF.Entities
 
         public decimal OriginalPrice { get; set; }
 
-        public int ViewCount { get; set; }
+        public int OrderCount { get; set; }
 
         public int Stock { get; set; }
 
@@ -33,6 +33,8 @@ namespace ShopeeFood.DAL.EF.Entities
 
         public Status Status { get; set; }
 
-        public List<OptionType_Item> OptionTye_Item { get; set; }
+        public List<OptionType_Item> OptionType_Item { get; set; }
+
+        public List<OrderDetail> OrderDetails { get; set; }
     }
 }

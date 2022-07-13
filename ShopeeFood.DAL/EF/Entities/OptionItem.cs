@@ -17,6 +17,6 @@ namespace ShopeeFood.DAL.EF.Entities
 
         public Status Status { get; set; }
 
-        public OptionType OptionType { get; set; }
+        public List<OptionType_OptionItem> OptionType_OptionItem { get; set; }
     }
 }

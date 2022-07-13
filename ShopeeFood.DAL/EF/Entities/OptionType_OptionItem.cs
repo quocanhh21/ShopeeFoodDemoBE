@@ -7,18 +7,16 @@ using System.Threading.Tasks;
 
 namespace ShopeeFood.DAL.EF.Entities
 {
-    public class City
+    public class OptionType_OptionItem
     {
-        public int Id { get; set; }
+        public int OptionTypeId { get; set; }
 
-        public string Name { get; set; }
+        public OptionType OptionType { get; set; }
 
-        public int OrderInList { get; set; }
+        public int OptionItemId { get; set; }
 
-        public int Amount { get; set; }
+        public OptionItem OptionItem { get; set; }
 
         public Status Status { get; set; }
-
-        public List<District> Districts { get; set; }
     }
 }

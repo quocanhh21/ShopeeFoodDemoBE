@@ -33,6 +33,6 @@ namespace ShopeeFood.DAL.EF.Entities
 
         public Voucher Voucher { get; set; }
 
-        public List<OrderDetail> OrderDetail { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
     }
 }
