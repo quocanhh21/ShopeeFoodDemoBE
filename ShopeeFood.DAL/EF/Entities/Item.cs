@@ -11,7 +11,11 @@ namespace ShopeeFood.DAL.EF.Entities
     {
         public int Id { get; set; }
 
+        public int MenuForeignKey { get; set; }
+
         public Menu Menu { get; set; }
+
+        public int SubCategoryForeignKey { get; set; }
 
         public SubCategory SubCategory { get; set; }
 

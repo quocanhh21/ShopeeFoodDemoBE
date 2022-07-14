@@ -20,7 +20,7 @@ namespace ShopeeFood.DAL.EF.Configurations
 
             builder.Property(x => x.Name).IsRequired().HasMaxLength(100);
 
-            builder.HasOne(s => s.Category).WithMany(c => c.SubCategories);
+            builder.HasOne(s => s.Category).WithMany(c => c.SubCategories).HasForeignKey(s=>s.CategoryForeignKey);
 
         }
     }

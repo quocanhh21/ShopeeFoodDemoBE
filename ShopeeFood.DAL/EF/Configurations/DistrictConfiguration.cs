@@ -22,6 +22,8 @@ namespace ShopeeFood.DAL.EF.Configurations
             builder.Property(x => x.Name).HasMaxLength(100);
 
             builder.Property(x => x.Status).HasDefaultValue(Status.Inactive);
+
+            builder.HasOne(d => d.City).WithMany(c => c.Districts).HasForeignKey(d=>d.CityForeignKey);
         }
     }
 }

@@ -33,9 +33,9 @@ namespace ShopeeFood.DAL.EF.Configurations
 
             builder.Property(x => x.Status).HasDefaultValue(Status.Active);
 
-            builder.HasOne(i => i.Menu).WithMany(m => m.Items);
+            builder.HasOne(i => i.Menu).WithMany(m => m.Items).HasForeignKey(i=>i.MenuForeignKey);
 
-            builder.HasOne(i => i.SubCategory).WithMany(m => m.Items);
+            builder.HasOne(i => i.SubCategory).WithMany(m => m.Items).HasForeignKey(i=>i.SubCategoryForeignKey);
 
         }
     }

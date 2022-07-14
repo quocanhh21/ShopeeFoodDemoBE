@@ -18,9 +18,11 @@ namespace ShopeeFood.DAL.EF.Configurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).UseIdentityColumn();
 
-            builder.HasOne(x => x.Order).WithMany(o => o.OrderDetails);
+            builder.HasOne(x => x.Order).WithMany(o => o.OrderDetails).HasForeignKey(d=>d.OrderForeignKey).OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(x => x.Item).WithMany(i => i.OrderDetails);
+            builder.HasOne(x => x.Item).WithMany(i => i.OrderDetails).HasForeignKey(d=>d.ItemForeignKey).OnDelete(DeleteBehavior.NoAction);
+
+            
         }
     }
 }

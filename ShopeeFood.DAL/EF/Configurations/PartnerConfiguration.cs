@@ -29,9 +29,9 @@ namespace ShopeeFood.DAL.EF.Configurations
 
             builder.Property(x => x.Status).HasDefaultValue(Status.Inactive);
 
-            builder.HasOne(p => p.TypePartner).WithMany(t => t.Partners);
+            builder.HasOne(p => p.TypePartner).WithMany(t => t.Partners).HasForeignKey(p=>p.TypePartnerForeignKey);
 
-            builder.HasOne(p => p.District).WithMany(d => d.Partners);
+            builder.HasOne(p => p.District).WithMany(d => d.Partners).HasForeignKey(p=>p.DistrictForeignKey);
         }
     }
 }
