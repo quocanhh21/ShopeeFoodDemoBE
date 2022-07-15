@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ShopeeFood.DAL.EF.Configurations;
 using ShopeeFood.DAL.EF.Entities;
 using System;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ShopeeFood.DAL.EF.Context
 {
-    public class ShopeeFoodDbContext: DbContext
+    public class ShopeeFoodDbContext: IdentityDbContext<Customer, AppRole,Guid>
     {
         public ShopeeFoodDbContext(DbContextOptions options): base(options)
         {
@@ -35,6 +37,20 @@ namespace ShopeeFood.DAL.EF.Context
             modelBuilder.ApplyConfiguration(new TypePartnerConfiguration());
             modelBuilder.ApplyConfiguration(new VoucherConfiguration());
             modelBuilder.ApplyConfiguration(new VoucherPartnerConfiguration());
+            modelBuilder.ApplyConfiguration(new TransactionConfiguration());
+
+            modelBuilder.ApplyConfiguration(new CustomerConfiguration());
+            modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
+
+            modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("CustomerClaims");
+            modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("CustomerRoles")
+                .HasKey(x=> new { x.UserId, x.RoleId});
+            modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("CustomerLogins")
+                .HasKey(x=>x.UserId);
+
+            modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("CustomerRoleClaims");
+            modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("CustomerUserTokens")
+                .HasKey(x=>x.UserId);
 
             //base.OnModelCreating(modelBuilder);
         }

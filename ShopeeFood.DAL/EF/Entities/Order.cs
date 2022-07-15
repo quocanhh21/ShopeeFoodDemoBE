@@ -27,7 +27,7 @@ namespace ShopeeFood.DAL.EF.Entities
 
         public OrderStatus OrderStatus { get; set; }
 
-        //public Customer Customer { get; set; }
+        public Customer Customer { get; set; }
 
         public int PartnerForeignKey { get; set; }
 
