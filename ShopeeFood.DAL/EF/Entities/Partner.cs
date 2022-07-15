@@ -11,6 +11,8 @@ namespace ShopeeFood.DAL.EF.Entities
     {
         public int Id { get; set; }
 
+        public int DistrictForeignKey { get; set; }
+
         public District District { get; set; }
 
         public string PartnerName { get; set; }
@@ -34,5 +36,9 @@ namespace ShopeeFood.DAL.EF.Entities
         public List<VoucherPartner> VoucherPartners { get; set; }
 
         public List<Order> Orders { get; set; }
+
+        public int TypePartnerForeignKey { get; set; }
+
+        public TypePartner TypePartner { get; set; }
     }
 }

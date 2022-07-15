@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ShopeeFood.DAL.EF.Configurations;
 using ShopeeFood.DAL.EF.Entities;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,29 @@ namespace ShopeeFood.DAL.EF.Context
         public ShopeeFoodDbContext(DbContextOptions options): base(options)
         {
             
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new AppConfigConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new CityConfiguration());
+            modelBuilder.ApplyConfiguration(new DistrictConfiguration());
+            modelBuilder.ApplyConfiguration(new ItemConfiguration());
+            modelBuilder.ApplyConfiguration(new MenuConfiguration());
+            modelBuilder.ApplyConfiguration(new OptionType_OptionItemConfiguration());
+            modelBuilder.ApplyConfiguration(new OptionItemConfiguration());
+            modelBuilder.ApplyConfiguration(new OptionTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new OptionTypes_ItemsConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderDetailConfiguration());
+            modelBuilder.ApplyConfiguration(new PartnerConfiguration());
+            modelBuilder.ApplyConfiguration(new SubCategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new TypePartnerConfiguration());
+            modelBuilder.ApplyConfiguration(new VoucherConfiguration());
+            modelBuilder.ApplyConfiguration(new VoucherPartnerConfiguration());
+
+            //base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<AppConfig> AppConfigs { get; set; }

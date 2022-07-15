@@ -8,7 +8,7 @@ namespace ShopeeFood.DAL.EF.Enums
 {
     public enum Status
     {
-        Active,
-        Inactive
+        Active = 1,
+        Inactive=2
     }
 }

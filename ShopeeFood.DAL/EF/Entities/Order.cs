@@ -29,10 +29,14 @@ namespace ShopeeFood.DAL.EF.Entities
 
         //public Customer Customer { get; set; }
 
+        public int PartnerForeignKey { get; set; }
+
         public Partner Partner { get; set; }
+
+        public int VoucherForeignKey { get; set; }
 
         public Voucher Voucher { get; set; }
 
-        public List<OrderDetail> OrderDetail { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
     }
 }

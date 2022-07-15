@@ -15,6 +15,10 @@ namespace ShopeeFood.DAL.EF.Entities
 
         public Status Status { get; set; }
 
+        public int CityForeignKey { get; set; }
+
         public City City { get; set; }
+
+        public List<Partner> Partners { get; set; }
     }
 }

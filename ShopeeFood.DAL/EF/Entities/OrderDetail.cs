@@ -14,7 +14,11 @@ namespace ShopeeFood.DAL.EF.Entities
 
         public decimal Price { get; set; }
 
+        public int OrderForeignKey { get; set; }
+
         public Order Order { get; set; }
+
+        public int ItemForeignKey { get; set; }
 
         public Item Item { get; set; }
     }
