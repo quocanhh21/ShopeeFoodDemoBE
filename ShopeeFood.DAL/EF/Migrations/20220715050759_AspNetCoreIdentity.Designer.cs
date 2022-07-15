@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopeeFood.DAL.EF.Context;
 
@@ -11,9 +12,10 @@ using ShopeeFood.DAL.EF.Context;
 namespace ShopeeFood.DAL.EF.Migrations
 {
     [DbContext(typeof(ShopeeFoodDbContext))]
-    partial class ShopeeFoodDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220715050759_AspNetCoreIdentity")]
+    partial class AspNetCoreIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

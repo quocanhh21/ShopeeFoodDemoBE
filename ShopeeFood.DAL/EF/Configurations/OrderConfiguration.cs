@@ -28,7 +28,7 @@ namespace ShopeeFood.DAL.EF.Configurations
 
             builder.Property(x => x.ShipPhone).IsRequired().HasMaxLength(50);
 
-            // hasOne customer...
+            builder.HasOne(x => x.Customer).WithMany(c => c.Orders).HasForeignKey(o => o.UserId);
         }
     }
 }
