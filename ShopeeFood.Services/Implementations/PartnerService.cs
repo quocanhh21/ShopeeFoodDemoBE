@@ -12,11 +12,11 @@ namespace ShopeeFood.Services.Implementations
 {
     public class PartnerService : IPartnerService
     {
-        private readonly ShopeeFoodDbContext _context;
+        private readonly IPartnerService _partnerRepository;
 
-        public PartnerService(ShopeeFoodDbContext context)
+        public PartnerService(IPartnerService partnerRepository)
         {
-            _context = context;
+            _partnerRepository = partnerRepository;
         }
         public async Task<List<PartnerViewModel>> GetAll()
         {

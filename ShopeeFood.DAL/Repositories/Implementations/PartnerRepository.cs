@@ -1,4 +1,5 @@
-﻿using ShopeeFood.DAL.EF.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using ShopeeFood.DAL.EF.Context;
 using ShopeeFood.DAL.Models;
 using ShopeeFood.DAL.Repositories.Contracts;
 using System;
@@ -17,9 +18,20 @@ namespace ShopeeFood.DAL.Repositories.Implementations
         {
             _context = context;
         }
-        public async Task<List<PartnerViewModel>> GetAll()
+
+        public async Task<List<PartnerViewModel>> GetAllByCategoryId()
         {
-            return await _context.Partners.ToList();
+            var query = from p in _context.Partners
+                        where p.Status == EF.Enums.Status.Active
+                        select new { p };
+            var data = await query.Select(x => new PartnerViewModel()).ToListAsync();
+
+            return data;
+        }
+
+        public Task<List<PartnerViewModel>> GetBySubCategoryId()
+        {
+            throw new NotImplementedException();
         }
     }
 }

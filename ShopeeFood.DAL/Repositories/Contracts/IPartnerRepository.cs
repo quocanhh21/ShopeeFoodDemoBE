@@ -9,6 +9,9 @@ namespace ShopeeFood.DAL.Repositories.Contracts
 {
     public interface IPartnerRepository
     {
-        Task<List<PartnerViewModel>> GetAll();
+        Task<List<PartnerViewModel>> GetAllByCategoryId();
+
+        Task<List<PartnerViewModel>> GetBySubCategoryId();
+
     }
 }
