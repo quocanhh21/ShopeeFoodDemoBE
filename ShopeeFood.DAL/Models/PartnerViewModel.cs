@@ -24,6 +24,8 @@ namespace ShopeeFood.DAL.Models
 
         public TimeSpan CloseTime { get; set; }
 
+        public string Image { get; set; }
+
         public int Rating { get; set; }
 
         public int Hot { get; set; }
@@ -32,14 +34,5 @@ namespace ShopeeFood.DAL.Models
 
         public Status Status { get; set; }
 
-        public List<Menu> Menus { get; set; }
-
-        public List<VoucherPartner> VoucherPartners { get; set; }
-
-        public List<Order> Orders { get; set; }
-
-        public int TypePartnerForeignKey { get; set; }
-
-        public TypePartner TypePartner { get; set; }
     }
 }

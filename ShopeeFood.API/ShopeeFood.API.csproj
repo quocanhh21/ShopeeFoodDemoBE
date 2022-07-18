@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ShopeeFood.Commons\ShopeeFood.Commons.csproj" />
     <ProjectReference Include="..\ShopeeFood.Services\ShopeeFood.Services.csproj" />
   </ItemGroup>
 

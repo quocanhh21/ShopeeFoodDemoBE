@@ -26,9 +26,13 @@ namespace ShopeeFood.DAL.Repositories.Implementations
         public async Task<List<PartnerViewModel>> GetAllByCategoryId()
         {
             var query = from p in _context.Partners
-                        where p.Status == EF.Enums.Status.Active
+                        
                         select new { p };
-            var data = await query.Select(x => new PartnerViewModel()).ToListAsync();
+            var data = await query.Select(x => new PartnerViewModel()
+            {
+                Id=x.p.Id,
+                PartnerName=x.p.PartnerName
+            }).ToListAsync();
 
             return data;
         }

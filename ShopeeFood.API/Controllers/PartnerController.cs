@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ShopeeFood.DAL.Repositories.Contracts;
 using ShopeeFood.Services.Contracts;
 using ShopeeFood.Services.Implementations;
 
@@ -9,9 +10,9 @@ namespace ShopeeFood.API.Controllers
     [ApiController]
     public class PartnerController : ControllerBase
     {
-        private readonly IPartnerService _partnerService;
+        private readonly IPartnerRepository _partnerService;
 
-        public PartnerController(IPartnerService partnerService)
+        public PartnerController(IPartnerRepository partnerService)
         {
             _partnerService = partnerService;
         }

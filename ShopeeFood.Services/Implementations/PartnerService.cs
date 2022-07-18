@@ -1,5 +1,6 @@
 ﻿using ShopeeFood.DAL.EF.Context;
 using ShopeeFood.DAL.Models;
+using ShopeeFood.DAL.Repositories.Contracts;
 using ShopeeFood.Services.Contracts;
 using ShopeeFood.Services.Models.Dtos;
 using System;
@@ -12,9 +13,9 @@ namespace ShopeeFood.Services.Implementations
 {
     public class PartnerService : IPartnerService
     {
-        private readonly IPartnerService _partnerRepository;
+        private readonly IPartnerRepository _partnerRepository;
 
-        public PartnerService(IPartnerService partnerRepository)
+        public PartnerService(IPartnerRepository partnerRepository)
         {
             _partnerRepository = partnerRepository;
         }
