@@ -10,9 +10,9 @@ namespace ShopeeFood.API.Controllers
     [ApiController]
     public class PartnerController : ControllerBase
     {
-        private readonly IPartnerRepository _partnerService;
+        private readonly IPartnerService _partnerService;
 
-        public PartnerController(IPartnerRepository partnerService)
+        public PartnerController(IPartnerService partnerService)
         {
             _partnerService = partnerService;
         }

@@ -17,9 +17,10 @@ builder.Services.AddDbContext<ShopeeFoodDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString(SystemConstants.MainConnectionString));
 });
 
-//builder.Services.AddIdentity<Customer, AppRole>()
-//    .AddEntityFrameworkStores<ShopeeFoodDbContext>();
+builder.Services.AddIdentity<Customer, AppRole>()
+    .AddEntityFrameworkStores<ShopeeFoodDbContext>();
 
+builder.Services.AddTransient<IPartnerService, PartnerService>(); 
 builder.Services.AddTransient<IPartnerRepository, PartnerRepository>();
 
 builder.Services.AddControllers();

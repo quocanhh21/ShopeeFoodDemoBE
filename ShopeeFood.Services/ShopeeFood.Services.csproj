@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ShopeeFood.Commons\ShopeeFood.Commons.csproj" />
     <ProjectReference Include="..\ShopeeFood.DAL\ShopeeFood.DAL.csproj" />
   </ItemGroup>
