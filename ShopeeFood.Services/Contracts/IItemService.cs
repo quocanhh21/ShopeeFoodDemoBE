@@ -13,6 +13,5 @@ namespace ShopeeFood.Services.Contracts
 
         IEnumerable<Item> GetAll(string keyWord);
 
-        IEnumerable<Item> GetAll(string key);
     }
 }

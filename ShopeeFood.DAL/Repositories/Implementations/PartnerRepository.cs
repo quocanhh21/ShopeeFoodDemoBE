@@ -19,6 +19,10 @@ namespace ShopeeFood.DAL.Repositories.Implementations
             _context = context;
         }
 
+        /// <summary>
+        /// Get parter by caterory ID 
+        /// </summary>
+        /// <returns>List partner</returns>
         public async Task<List<PartnerViewModel>> GetAllByCategoryId()
         {
             var query = from p in _context.Partners

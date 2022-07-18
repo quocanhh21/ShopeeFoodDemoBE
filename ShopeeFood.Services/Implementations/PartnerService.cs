@@ -18,9 +18,10 @@ namespace ShopeeFood.Services.Implementations
         {
             _partnerRepository = partnerRepository;
         }
-        public async Task<List<PartnerViewModel>> GetAll()
+
+        public async Task<List<PartnerViewModel>> GetAllByCategoryId()
         {
-            throw new NotImplementedException();
+            return await _partnerRepository.GetAllByCategoryId();
         }
     }
 }

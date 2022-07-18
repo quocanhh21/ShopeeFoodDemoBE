@@ -11,7 +11,7 @@ namespace ShopeeFood.Services.Contracts
 {
     public interface IPartnerService
     {
-        Task<List<PartnerViewModel>> GetAll();
+        Task<List<PartnerViewModel>> GetAllByCategoryId();
 
         //PagedViewModel<PartnerViewModel> GetAllByCategoryId(int catagoryId, int pageIndex, int pageSized);
 

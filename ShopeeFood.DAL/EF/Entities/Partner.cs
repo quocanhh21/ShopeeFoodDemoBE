@@ -23,6 +23,8 @@ namespace ShopeeFood.DAL.EF.Entities
 
         public TimeSpan CloseTime { get; set; }
 
+        public string Image { get; set; }
+
         public int Rating { get; set; }
 
         public int Hot { get; set; }
