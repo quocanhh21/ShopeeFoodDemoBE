@@ -11,7 +11,7 @@ namespace ShopeeFood.DAL.Repositories.Contracts
     {
         Task<List<PartnerViewModel>> GetAllByCategoryId();
 
-        Task<List<PartnerViewModel>> GetBySubCategoryId();
+        Task<List<PartnerViewModel>> GetBySubCategoryId(int subCategoryId);
 
     }
 }

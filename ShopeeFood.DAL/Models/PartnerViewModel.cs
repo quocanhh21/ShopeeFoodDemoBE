@@ -34,5 +34,13 @@ namespace ShopeeFood.DAL.Models
 
         public Status Status { get; set; }
 
+        public List<Menu> Menus { get; set; }
+
+        public List<VoucherPartner> VoucherPartners { get; set; }
+
+        public int TypePartnerForeignKey { get; set; }
+
+        public TypePartner TypePartner { get; set; }
+
     }
 }
