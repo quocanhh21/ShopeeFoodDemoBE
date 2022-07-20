@@ -23,5 +23,12 @@ namespace ShopeeFood.API.Controllers
             var partners = await _partnerService.GetAllByCategoryId();
             return Ok(partners);
         }
+
+        [HttpGet("{subCategoryId}")]
+        public async Task<IActionResult> GetPartnersBySubCategoryId(int subCategoryId)
+        {
+            var partners = await _partnerService.GetBySubCategoryId(subCategoryId);
+            return Ok(partners);
+        }
     }
 }

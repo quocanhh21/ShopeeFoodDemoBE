@@ -13,6 +13,8 @@ namespace ShopeeFood.Services.Contracts
     {
         Task<List<PartnerViewModel>> GetAllByCategoryId();
 
+        Task<List<PartnerViewModel>> GetBySubCategoryId(int subCategoryId);
+
         //PagedViewModel<PartnerViewModel> GetAllByCategoryId(int catagoryId, int pageIndex, int pageSized);
 
         //IEnumerable<Partner> GetListPartnerBySubCategoryIdPaging(int subCategory,int page, int pageSize, string sort,out int totalRow);

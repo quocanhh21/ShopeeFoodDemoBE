@@ -49,13 +49,44 @@ namespace ShopeeFood.DAL.Repositories.Implementations
             return data;
         }
 
-        public Task<List<PartnerViewModel>> GetBySubCategoryId(int subCategoryId)
+        public async Task<List<PartnerViewModel>> GetBySubCategoryId(int subCategoryId)
         {
-            //var query= from tp in _context.TypePartners
-            //           join p in _context.Partners on tp.Id equals p.TypePartnerForeignKey
-            //           where
+            var query = from sc in _context.SubCategories
+                        join i in _context.Items
+                            on sc.Id  equals i.SubCategoryForeignKey 
+                        join m in _context.Menus
+                            on i.MenuForeignKey equals m.Id
+                        join p in _context.Partners
+                            on m.PartnerForeignKey  equals p.Id 
+                        where sc.Id == subCategoryId
+                        
+                        select new { p };
 
-            throw new NotImplementedException();
+
+            //var data = await query.Select(c => new PartnerViewModel()
+            //{
+            //    PartnerName= c.g.Key.ToString()
+            //}
+            //    ).ToListAsync();
+
+            var gr = await query.GroupBy(x => x.p.PartnerName);
+
+            //var data = await query.Select(s => new PartnerViewModel()
+            //{
+            //    Id = s.p.Id,
+            //    Image = s.p.Image,
+            //    PartnerName = s.p.PartnerName,
+            //    Address = s.p.Address,
+            //    District = s.p.District,
+            //    OpenTime = s.p.OpenTime,
+            //    CloseTime = s.p.CloseTime,
+            //    TypePartner = s.p.TypePartner,
+
+            //}).ToListAsync();
+
+
+
+            return gr;
         }
     }
 }

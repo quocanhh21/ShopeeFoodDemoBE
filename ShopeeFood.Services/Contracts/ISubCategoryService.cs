@@ -1,4 +1,4 @@
-﻿using ShopeeFood.DAL.EF.Entities;
+﻿using ShopeeFood.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace ShopeeFood.Services.Contracts
 {
-    public interface IItemService
+    public interface ISubCategoryService
     {
-        IEnumerable<Item> GetAll();
-
-        IEnumerable<Item> GetAll(string keyWord);
-
+        Task<List<SubCategoryViewModel>> GetSubCategoryByIdCategory(int idCategory);
     }
 }

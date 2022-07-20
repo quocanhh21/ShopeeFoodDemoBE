@@ -23,6 +23,12 @@ builder.Services.AddIdentity<Customer, AppRole>()
 builder.Services.AddTransient<IPartnerService, PartnerService>(); 
 builder.Services.AddTransient<IPartnerRepository, PartnerRepository>();
 
+builder.Services.AddTransient<ICategoryService, CategoryService>();
+builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
+
+builder.Services.AddTransient<ISubCategoryService, SubCategoryService>();
+builder.Services.AddTransient<ISubCategoryRepository, SubCategoryRepository>();
+
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
