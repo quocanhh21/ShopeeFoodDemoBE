@@ -30,19 +30,19 @@ namespace ShopeeFood.DAL.Repositories.Implementations
                         select new { p };
             var data = await query.Select(x => new PartnerViewModel()
             {
-                Id=x.p.Id,
-                PartnerName=x.p.PartnerName,
-                Address= x.p.Address,
-                District=x.p.District,
-                OpenTime=x.p.OpenTime,  
-                CloseTime=x.p.CloseTime,    
-                Image=x.p.Image,
-                Rating=x.p.Rating,
-                Hot=x.p.Hot,
-                FastDelivery=x.p.FastDelivery,
-                Menus=x.p.Menus,
-                VoucherPartners=x.p.VoucherPartners,
-                TypePartner=x.p.TypePartner
+                Id = x.p.Id,
+                PartnerName = x.p.PartnerName,
+                Address = x.p.Address,
+                District = x.p.District,
+                OpenTime = x.p.OpenTime,
+                CloseTime = x.p.CloseTime,
+                Image = x.p.Image,
+                Rating = x.p.Rating,
+                Hot = x.p.Hot,
+                FastDelivery = x.p.FastDelivery,
+                Menus = x.p.Menus,
+                VoucherPartners = x.p.VoucherPartners,
+                TypePartner = x.p.TypePartner
 
             }).ToListAsync();
 
@@ -53,26 +53,13 @@ namespace ShopeeFood.DAL.Repositories.Implementations
         {
             var query = from sc in _context.SubCategories
                         join i in _context.Items
-                            on sc.Id  equals i.SubCategoryForeignKey 
+                            on sc.Id equals i.SubCategoryForeignKey
                         join m in _context.Menus
                             on i.MenuForeignKey equals m.Id
                         join p in _context.Partners
-                            on m.PartnerForeignKey  equals p.Id 
+                            on m.PartnerForeignKey equals p.Id
                         where sc.Id == subCategoryId
-                        
-                        select new 
-                        {
-                            p
-                        };
-
-
-            //var data = await query.Select(c => new PartnerViewModel()
-            //{
-            //    PartnerName= c.g.Key.ToString()
-            //}
-            //    ).ToListAsync();
-
-            //var data = await query.ToListAsync();
+                        select new { p };
 
             var data = await query.Select(s => new PartnerViewModel()
             {
@@ -84,10 +71,7 @@ namespace ShopeeFood.DAL.Repositories.Implementations
                 OpenTime = s.p.OpenTime,
                 CloseTime = s.p.CloseTime,
                 TypePartner = s.p.TypePartner,
-
-            }).ToListAsync();
-
-
+            }).Distinct().ToListAsync();
 
             return data;
         }
