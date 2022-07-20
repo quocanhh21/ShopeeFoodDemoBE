@@ -60,7 +60,10 @@ namespace ShopeeFood.DAL.Repositories.Implementations
                             on m.PartnerForeignKey  equals p.Id 
                         where sc.Id == subCategoryId
                         
-                        select new { p };
+                        select new 
+                        {
+                            p
+                        };
 
 
             //var data = await query.Select(c => new PartnerViewModel()
@@ -69,24 +72,24 @@ namespace ShopeeFood.DAL.Repositories.Implementations
             //}
             //    ).ToListAsync();
 
-            var gr = await query.GroupBy(x => x.p.PartnerName);
+            //var data = await query.ToListAsync();
 
-            //var data = await query.Select(s => new PartnerViewModel()
-            //{
-            //    Id = s.p.Id,
-            //    Image = s.p.Image,
-            //    PartnerName = s.p.PartnerName,
-            //    Address = s.p.Address,
-            //    District = s.p.District,
-            //    OpenTime = s.p.OpenTime,
-            //    CloseTime = s.p.CloseTime,
-            //    TypePartner = s.p.TypePartner,
+            var data = await query.Select(s => new PartnerViewModel()
+            {
+                Id = s.p.Id,
+                Image = s.p.Image,
+                PartnerName = s.p.PartnerName,
+                Address = s.p.Address,
+                District = s.p.District,
+                OpenTime = s.p.OpenTime,
+                CloseTime = s.p.CloseTime,
+                TypePartner = s.p.TypePartner,
 
-            //}).ToListAsync();
+            }).ToListAsync();
 
 
 
-            return gr;
+            return data;
         }
     }
 }
