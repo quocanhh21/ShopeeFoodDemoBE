@@ -25,6 +25,8 @@ namespace ShopeeFood.DAL.EF.Entities
 
         public double? DiscountMoney { get; set; }
 
+        public double? MinMoney { get; set; }
+
         public DateTime FromDate { get; set; }
 
         public DateTime ToDate { get; set; }
