@@ -29,6 +29,9 @@ builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 builder.Services.AddTransient<ISubCategoryService, SubCategoryService>();
 builder.Services.AddTransient<ISubCategoryRepository, SubCategoryRepository>();
 
+builder.Services.AddTransient<IVoucherService, VoucherService>();
+builder.Services.AddTransient<IVoucherRepository, VoucherRepository>();
+
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

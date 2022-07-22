@@ -25,6 +25,11 @@ namespace ShopeeFood.Services.Implementations
             return await _partnerRepository.GetAllByCategoryId();
         }
 
+        public async Task<PageResult<PartnerViewModel>> GetAllPartnerPromotePaging(GetPartnerRequest request)
+        {
+            return await _partnerRepository.GetAllPartnerPromotePaging(request);
+        }
+
         public async Task<List<PartnerViewModel>> GetBySubCategoryId(int subCategoryId)
         {
             return await _partnerRepository.GetBySubCategoryId(subCategoryId);

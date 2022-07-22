@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShopeeFood.DAL.EF.Entities
+namespace ShopeeFood.DAL.Models
 {
-    public class Voucher
+    public class VoucherViewModel
     {
         public int Id { get; set; }
 
-        public Category Category { get; set; }
+        //public Category Category { get; set; }
 
         public string VoucherName { get; set; }
 
@@ -37,10 +37,10 @@ namespace ShopeeFood.DAL.EF.Entities
 
         public Status Status { get; set; }
 
-        public List<VoucherPartner> VoucherPartners { get; set; }
+        //public List<VoucherPartner> VoucherPartners { get; set; }
 
         public int CategoryForeignKey { get; set; }
 
-        public List<Order> Orders { get; set; }
+        //public List<Order> Orders { get; set; }
     }
 }

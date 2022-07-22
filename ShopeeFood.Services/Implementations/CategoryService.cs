@@ -18,9 +18,9 @@ namespace ShopeeFood.Services.Implementations
             _categoryRepository = categoryRepository;
         }
 
-        public Task<List<CategoryViewModel>> GetAllCategory()
+        public async Task<List<CategoryViewModel>> GetAllCategory()
         {
-            return _categoryRepository.GetAllCategory();
+            return await _categoryRepository.GetAllCategory();
         }
     }
 }

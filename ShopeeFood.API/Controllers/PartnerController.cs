@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ShopeeFood.DAL.Models;
 using ShopeeFood.DAL.Repositories.Contracts;
 using ShopeeFood.Services.Contracts;
 using ShopeeFood.Services.Implementations;
+
 
 namespace ShopeeFood.API.Controllers
 {
@@ -29,6 +31,13 @@ namespace ShopeeFood.API.Controllers
         {
             var partners = await _partnerService.GetBySubCategoryId(subCategoryId);
             return Ok(partners);
+        }
+
+        [HttpGet("paging")]
+        public async Task<IActionResult> GetAllPaging([FromQuery] GetPartnerRequest request)
+        {
+            var products = await _partnerService.GetAllPartnerPromotePaging(request);
+            return Ok(products);
         }
     }
 }
