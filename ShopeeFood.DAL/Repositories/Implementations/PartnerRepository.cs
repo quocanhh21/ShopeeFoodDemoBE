@@ -52,7 +52,7 @@ namespace ShopeeFood.DAL.Repositories.Implementations
         /// <summary>
         /// Get partner have any promote
         /// </summary>
-        /// <param name="request"></param>
+        /// <param name="request"></param> 
         /// <returns></returns>
         public async Task<PageResult<PartnerViewModel>> GetAllPartnerPromotePaging(GetPartnerRequest request)
         {
@@ -73,7 +73,7 @@ namespace ShopeeFood.DAL.Repositories.Implementations
 
             //paging
 
-            int totalRow = await query.GroupBy(gr=>gr.p.Id).CountAsync();
+            int totalRow = await query.GroupBy(gr => gr.p.Id).CountAsync();
 
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)

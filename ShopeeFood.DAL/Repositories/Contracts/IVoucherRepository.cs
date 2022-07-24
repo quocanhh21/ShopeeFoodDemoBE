@@ -10,5 +10,7 @@ namespace ShopeeFood.DAL.Repositories.Contracts
     public interface IVoucherRepository
     {
         Task<List<VoucherViewModel>> GetVouchersByPartnerId(int idPartner);
+
+        Task<List<VoucherViewModel>> GetAllVoucherByCategoryId(int idCategory);
     }
 }

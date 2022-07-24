@@ -10,5 +10,7 @@ namespace ShopeeFood.Services.Contracts
     public interface IVoucherService
     {
         Task<List<VoucherViewModel>> GetVouchersByPartnerId(int idPartner);
+
+        Task<List<VoucherViewModel>> GetAllVoucherByCategoryId(int idCategory);
     }
 }

@@ -16,9 +16,16 @@ namespace ShopeeFood.API.Controllers
         }
 
         [HttpGet("{idPartner}")]
-        public async Task<IActionResult> GetPartnersBySubCategoryId(int idPartner)
+        public async Task<IActionResult> GetVouchersByPartnerId(int idPartner)
         {
             var vouchers = await _voucherService.GetVouchersByPartnerId(idPartner);
+            return Ok(vouchers);
+        }
+
+        [HttpGet("idCategory")]
+        public async Task<IActionResult> GetAllVoucherByCategoryId(int idCategory)
+        {
+            var vouchers = await _voucherService.GetAllVoucherByCategoryId(idCategory);
             return Ok(vouchers);
         }
     }

@@ -17,6 +17,12 @@ namespace ShopeeFood.Services.Implementations
         {
             _voucherRepository = voucherRepository;
         }
+
+        public Task<List<VoucherViewModel>> GetAllVoucherByCategoryId(int idCategory)
+        {
+            return _voucherRepository.GetAllVoucherByCategoryId(idCategory);    
+        }
+
         public async Task<List<VoucherViewModel>> GetVouchersByPartnerId(int idPartner)
         {
             return await _voucherRepository.GetVouchersByPartnerId(idPartner);

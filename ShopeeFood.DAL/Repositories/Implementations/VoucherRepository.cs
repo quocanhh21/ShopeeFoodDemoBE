@@ -18,6 +18,44 @@ namespace ShopeeFood.DAL.Repositories.Implementations
         {
             _context = context;
         }
+
+        /// <summary>
+        /// List all voucher by category Id
+        /// </summary>
+        /// <param name="idCategory"></param>
+        /// <returns></returns>
+        public async Task<List<VoucherViewModel>> GetAllVoucherByCategoryId(int idCategory)
+        {
+            var query = from v in _context.Vouchers
+                        join c in _context.Categories
+                            on v.CategoryForeignKey equals c.Id
+                        select new { v,c };
+
+            if (idCategory > 0)
+            {
+                query = query.Where(x => x.c.Id == idCategory);
+            }
+
+            var data = await query.Select(x => new VoucherViewModel()
+            {
+                Id = x.v.Id,
+                VoucherName = x.v.VoucherName,
+                Description = x.v.Description,
+                Image = x.v.Image,
+                PercentDiscount = x.v.PercentDiscount,
+                MaxDiscount = x.v.MaxDiscount,
+                DiscountMoney = x.v.DiscountMoney,
+                MinMoney = x.v.MinMoney,
+                Code = x.v.Code,
+                FromDate = x.v.FromDate,
+                ToDate = x.v.ToDate,
+                Stock = x.v.Stock,
+                Status = x.v.Status
+            }).ToListAsync();
+
+            return data;
+        }
+
         public async Task<List<VoucherViewModel>> GetVouchersByPartnerId(int idPartner)
         {
             var query = from vp in _context.VoucherPartners
@@ -42,7 +80,6 @@ namespace ShopeeFood.DAL.Repositories.Implementations
                 ToDate = x.v.ToDate,
                 Stock = x.v.Stock,
                 Status = x.v.Status
-
             }).ToListAsync();
 
             return data;
