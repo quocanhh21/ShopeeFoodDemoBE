@@ -30,19 +30,19 @@ namespace ShopeeFood.DAL.Repositories.Implementations
                         select new { p };
             var data = await query.Select(x => new PartnerViewModel()
             {
-                Id=x.p.Id,
-                PartnerName=x.p.PartnerName,
-                Address= x.p.Address,
-                District=x.p.District,
-                OpenTime=x.p.OpenTime,  
-                CloseTime=x.p.CloseTime,    
-                Image=x.p.Image,
-                Rating=x.p.Rating,
-                Hot=x.p.Hot,
-                FastDelivery=x.p.FastDelivery,
-                Menus=x.p.Menus,
-                VoucherPartners=x.p.VoucherPartners,
-                TypePartner=x.p.TypePartner
+                Id = x.p.Id,
+                PartnerName = x.p.PartnerName,
+                Address = x.p.Address,
+                District = x.p.District.Name,
+                OpenTime = x.p.OpenTime,
+                CloseTime = x.p.CloseTime,
+                Image = x.p.Image,
+                Rating = x.p.Rating,
+                Hot = x.p.Hot,
+                FastDelivery = x.p.FastDelivery,
+                Menus = x.p.Menus,
+                VoucherPartners = x.p.VoucherPartners,
+                TypePartner = x.p.TypePartner.Name
 
             }).ToListAsync();
 
@@ -73,24 +73,31 @@ namespace ShopeeFood.DAL.Repositories.Implementations
 
             //paging
 
-            int totalRow = await query.CountAsync();
+            int totalRow = await query.GroupBy(gr=>gr.p.Id).CountAsync();
+
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
-                .Select(x=> new PartnerViewModel ()
+                .GroupBy(gr => new
                 {
-                    Id = x.p.Id,
-                    PartnerName = x.p.PartnerName,
-                    Address = x.p.Address,
-                    District = x.p.District,
-                    OpenTime = x.p.OpenTime,
-                    CloseTime = x.p.CloseTime,
-                    Image = x.p.Image,
-                    Rating = x.p.Rating,
-                    Hot = x.p.Hot,
-                    FastDelivery = x.p.FastDelivery,
-                    Menus = x.p.Menus,
-                    VoucherPartners = x.p.VoucherPartners,
-                    TypePartner = x.p.TypePartner
+                    gr.p.Id,
+                    gr.p.PartnerName,
+                    gr.p.Image,
+                    gr.p.Address,
+                    nameDistrict = gr.p.District.Name,
+                    gr.p.OpenTime,
+                    gr.p.CloseTime,
+                    nameType = gr.p.TypePartner.Name
+                }).Select(s => new PartnerViewModel()
+                {
+                    Id = s.Key.Id,
+                    PartnerName = s.Key.PartnerName,
+                    Image = s.Key.Image,
+                    Address = s.Key.Address,
+                    District = s.Key.nameDistrict,
+                    OpenTime = s.Key.OpenTime,
+                    CloseTime = s.Key.CloseTime,
+                    TypePartner = s.Key.nameDistrict
+
                 }).ToListAsync();
 
             //Select and projection
@@ -101,24 +108,6 @@ namespace ShopeeFood.DAL.Repositories.Implementations
                 PageIndex = request.PageIndex,
                 Items = data
             };
-
-            //var data = await query.Skip((request.PageIndex - 1)* request.PageSize).Take(request.PageSize).Select(x => new PartnerViewModel()
-            //{
-            //    Id = x.p.Id,
-            //    PartnerName = x.p.PartnerName,
-            //    Address = x.p.Address,
-            //    District = x.p.District,
-            //    OpenTime = x.p.OpenTime,
-            //    CloseTime = x.p.CloseTime,
-            //    Image = x.p.Image,
-            //    Rating = x.p.Rating,
-            //    Hot = x.p.Hot,
-            //    FastDelivery = x.p.FastDelivery,
-            //    Menus = x.p.Menus,
-            //    VoucherPartners = x.p.VoucherPartners,
-            //    TypePartner = x.p.TypePartner
-
-            //}).Distinct().ToListAsync();
 
             return pagedResult;
         }
@@ -135,17 +124,28 @@ namespace ShopeeFood.DAL.Repositories.Implementations
                         where sc.Id == subCategoryId
                         select new { p };
 
-            var data = await query.Select(s => new PartnerViewModel()
+            var data = await query.GroupBy(gr => new 
+            { 
+                gr.p.Id, 
+                gr.p.PartnerName,
+                gr.p.Image,
+                gr.p.Address,
+                nameDistrict = gr.p.District.Name,
+                gr.p.OpenTime,
+                gr.p.CloseTime,
+                nameType= gr.p.TypePartner.Name
+            }).Select(s => new PartnerViewModel()
             {
-                Id = s.p.Id,
-                Image = s.p.Image,
-                PartnerName = s.p.PartnerName,
-                Address = s.p.Address,
-                District = s.p.District,
-                OpenTime = s.p.OpenTime,
-                CloseTime = s.p.CloseTime,
-                TypePartner = s.p.TypePartner,
-            }).Distinct().ToListAsync();
+                Id = s.Key.Id,
+                PartnerName = s.Key.PartnerName,
+                Image = s.Key.Image,
+                Address = s.Key.Address,
+                District = s.Key.nameDistrict,
+                OpenTime = s.Key.OpenTime,
+                CloseTime = s.Key.CloseTime,
+                TypePartner=s.Key.nameDistrict
+
+            }).ToListAsync();
 
             return data;
         }

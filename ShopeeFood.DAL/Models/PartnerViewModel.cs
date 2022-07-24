@@ -14,7 +14,7 @@ namespace ShopeeFood.DAL.Models
 
         public int DistrictForeignKey { get; set; }
 
-        public District District { get; set; }
+        public string District { get; set; }
 
         public string PartnerName { get; set; }
 
@@ -40,7 +40,7 @@ namespace ShopeeFood.DAL.Models
 
         public int TypePartnerForeignKey { get; set; }
 
-        public TypePartner TypePartner { get; set; }
+        public string TypePartner { get; set; }
 
     }
 }

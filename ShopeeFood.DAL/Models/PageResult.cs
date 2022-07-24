@@ -9,7 +9,5 @@ namespace ShopeeFood.DAL.Models
     public class PageResult<T> : PagedResultBase
     {
         public List<T> Items { get; set; }
-
-        
     }
 }
