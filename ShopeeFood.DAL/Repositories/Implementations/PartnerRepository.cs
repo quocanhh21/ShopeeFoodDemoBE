@@ -56,21 +56,20 @@ namespace ShopeeFood.DAL.Repositories.Implementations
                         join p in _context.Partners
                             on d.Id equals p.DistrictForeignKey into d_p
                         from p in d_p.DefaultIfEmpty()
-                        join vp in _context.VoucherPartners
-                            on p.Id equals vp.PartnerId into vp_p
-                        from vp in vp_p.DefaultIfEmpty()
-                        join v in _context.Vouchers
-                             on vp.VoucherId equals v.Id into vp_v
-                        from v in vp_v.DefaultIfEmpty()
-                        join c in _context.Categories
-                             on v.CategoryForeignKey equals c.Id into v_c
-                        from c in v_c.DefaultIfEmpty()
+                        join m in _context.Menus
+                            on p.Id equals m.PartnerForeignKey into p_m
+                        from m in p_m.DefaultIfEmpty()
+                        join i in _context.Items
+                             on m.Id equals i.MenuForeignKey into m_i
+                        from i in m_i.DefaultIfEmpty()
                         join sc in _context.SubCategories
-                             on c.Id equals sc.CategoryForeignKey into sc_c
-                        from sc in sc_c.DefaultIfEmpty()
+                             on i.SubCategoryForeignKey equals sc.Id into i_sc
+                        from sc in i_sc.DefaultIfEmpty()
+                        join c in _context.Categories
+                             on sc.CategoryForeignKey equals c.Id into sc_c
+                        from c in sc_c.DefaultIfEmpty()
                         where p.Status == EF.Enums.Status.Active
-                        select new { d,p,v,c,sc};
-                        
+                        select new { d,p,m,i,c,sc};
 
             // filter search keyword
             if (!string.IsNullOrEmpty(request.Keyword))
@@ -100,7 +99,8 @@ namespace ShopeeFood.DAL.Repositories.Implementations
                 nameDistrict = gr.p.District.Name,
                 gr.p.OpenTime,
                 gr.p.CloseTime,
-                nameType = gr.p.TypePartner.Name
+                nameType = gr.p.TypePartner.Name,
+                
 
             }).Select(s => new PartnerViewModel()
             {
@@ -111,12 +111,20 @@ namespace ShopeeFood.DAL.Repositories.Implementations
                 District = s.Key.nameDistrict,
                 OpenTime = s.Key.OpenTime,
                 CloseTime = s.Key.CloseTime,
-                TypePartner = s.Key.nameType
+                TypePartner = s.Key.nameType,
+                
             }).ToList();
+
+            ////filter promote partner
+            //if (request.IsPromote)
+            //{
+            //    var promotePartners = groupPartner.Any(x=>x.VoucherPartners.Count > 0);
+            //}
+
 
             //paging
 
-            int totalRow = await query.GroupBy(gr => gr.p.Id).CountAsync();
+            int totalRow =  groupPartner.GroupBy(gr => gr.Id).Count();
 
             var data = groupPartner.Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize).ToList();
