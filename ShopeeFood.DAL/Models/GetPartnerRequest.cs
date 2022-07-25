@@ -14,6 +14,12 @@ namespace ShopeeFood.DAL.Models
 
         public string? Keyword { get; set; }
 
-        public int? CategoryId { get; set; }
+        public int CategoryId { get; set; }
+
+        public IList<int>? DistrictId { get; set; }
+
+        public IList<int>? SubCategoyIds { get; set; }
+
+        public bool IsPromote { get; set; } = false;
     }
 }

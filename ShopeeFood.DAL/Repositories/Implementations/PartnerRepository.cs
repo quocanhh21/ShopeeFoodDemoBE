@@ -2,11 +2,6 @@
 using ShopeeFood.DAL.EF.Context;
 using ShopeeFood.DAL.Models;
 using ShopeeFood.DAL.Repositories.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ShopeeFood.DAL.Repositories.Implementations
 {
@@ -54,51 +49,78 @@ namespace ShopeeFood.DAL.Repositories.Implementations
         /// </summary>
         /// <param name="request"></param> 
         /// <returns></returns>
-        public async Task<PageResult<PartnerViewModel>> GetAllPartnerPromotePaging(GetPartnerRequest request)
+        public async Task<PageResult<PartnerViewModel>> GetAllPartnerPaging(GetPartnerRequest request)
         {
-            var query = from p in _context.Partners
+            //----------Case 1: Group by------------------------
+            var query = from d in _context.Districts
+                        join p in _context.Partners
+                            on d.Id equals p.DistrictForeignKey into d_p
+                        from p in d_p.DefaultIfEmpty()
                         join vp in _context.VoucherPartners
-                            on p.Id equals vp.PartnerId
+                            on p.Id equals vp.PartnerId into vp_p
+                        from vp in vp_p.DefaultIfEmpty()
                         join v in _context.Vouchers
-                            on vp.VoucherId equals v.Id
+                             on vp.VoucherId equals v.Id into vp_v
+                        from v in vp_v.DefaultIfEmpty()
                         join c in _context.Categories
-                            on v.CategoryForeignKey equals c.Id
-                        where p.Status == EF.Enums.Status.Active && c.Id == request.CategoryId
-                        select new { p };
+                             on v.CategoryForeignKey equals c.Id into v_c
+                        from c in v_c.DefaultIfEmpty()
+                        join sc in _context.SubCategories
+                             on c.Id equals sc.CategoryForeignKey into sc_c
+                        from sc in sc_c.DefaultIfEmpty()
+                        where p.Status == EF.Enums.Status.Active
+                        select new { d,p,v,c,sc};
+                        
 
+            // filter search keyword
             if (!string.IsNullOrEmpty(request.Keyword))
             {
-                query = query.Where(x => x.p.PartnerName.Contains(request.Keyword));
+                query = query.Where(x => x.p.PartnerName.ToLower().Contains(request.Keyword.ToLower()));
             }
+
+            // filter by category id 
+            if (request.CategoryId > 0)
+            {
+                query = query.Where(x => x.c.Id == request.CategoryId);
+            }
+
+            //filter by district id 
+            if (request.DistrictId != null && request.DistrictId.Any() )
+            {
+                query = query.Where(x => request.DistrictId.Any(t => t == x.d.Id));
+            }
+
+            //group by partner
+            var groupPartner = query.GroupBy(gr => new
+            {
+                gr.p.Id,
+                gr.p.PartnerName,
+                gr.p.Image,
+                gr.p.Address,
+                nameDistrict = gr.p.District.Name,
+                gr.p.OpenTime,
+                gr.p.CloseTime,
+                nameType = gr.p.TypePartner.Name
+
+            }).Select(s => new PartnerViewModel()
+            {
+                Id = s.Key.Id,
+                PartnerName = s.Key.PartnerName,
+                Image = s.Key.Image,
+                Address = s.Key.Address,
+                District = s.Key.nameDistrict,
+                OpenTime = s.Key.OpenTime,
+                CloseTime = s.Key.CloseTime,
+                TypePartner = s.Key.nameType
+            }).ToList();
 
             //paging
 
             int totalRow = await query.GroupBy(gr => gr.p.Id).CountAsync();
 
-            var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
-                .Take(request.PageSize)
-                .GroupBy(gr => new
-                {
-                    gr.p.Id,
-                    gr.p.PartnerName,
-                    gr.p.Image,
-                    gr.p.Address,
-                    nameDistrict = gr.p.District.Name,
-                    gr.p.OpenTime,
-                    gr.p.CloseTime,
-                    nameType = gr.p.TypePartner.Name
-                }).Select(s => new PartnerViewModel()
-                {
-                    Id = s.Key.Id,
-                    PartnerName = s.Key.PartnerName,
-                    Image = s.Key.Image,
-                    Address = s.Key.Address,
-                    District = s.Key.nameDistrict,
-                    OpenTime = s.Key.OpenTime,
-                    CloseTime = s.Key.CloseTime,
-                    TypePartner = s.Key.nameDistrict
+            var data = groupPartner.Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize).ToList();
 
-                }).ToListAsync();
 
             //Select and projection
             var pagedResult = new PageResult<PartnerViewModel>()
@@ -124,16 +146,16 @@ namespace ShopeeFood.DAL.Repositories.Implementations
                         where sc.Id == subCategoryId
                         select new { p };
 
-            var data = await query.GroupBy(gr => new 
-            { 
-                gr.p.Id, 
+            var data = await query.GroupBy(gr => new
+            {
+                gr.p.Id,
                 gr.p.PartnerName,
                 gr.p.Image,
                 gr.p.Address,
                 nameDistrict = gr.p.District.Name,
                 gr.p.OpenTime,
                 gr.p.CloseTime,
-                nameType= gr.p.TypePartner.Name
+                nameType = gr.p.TypePartner.Name
             }).Select(s => new PartnerViewModel()
             {
                 Id = s.Key.Id,
@@ -143,7 +165,7 @@ namespace ShopeeFood.DAL.Repositories.Implementations
                 District = s.Key.nameDistrict,
                 OpenTime = s.Key.OpenTime,
                 CloseTime = s.Key.CloseTime,
-                TypePartner=s.Key.nameDistrict
+                TypePartner = s.Key.nameDistrict
 
             }).ToListAsync();
 

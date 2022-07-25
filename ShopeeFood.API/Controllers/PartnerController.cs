@@ -26,18 +26,20 @@ namespace ShopeeFood.API.Controllers
             return Ok(partners);
         }
 
-        [HttpGet("{subCategoryId}")]
+        [HttpGet]
+        [Route("{subCategoryId}")]
         public async Task<IActionResult> GetPartnersBySubCategoryId(int subCategoryId)
         {
             var partners = await _partnerService.GetBySubCategoryId(subCategoryId);
             return Ok(partners);
         }
 
-        [HttpGet("paging")]
-        public async Task<IActionResult> GetAllPaging([FromQuery] GetPartnerRequest request)
+        [HttpPost]
+        [Route("paging")]
+        public async Task<IActionResult> GetAllPartnerPaging(GetPartnerRequest request)
         {
-            var products = await _partnerService.GetAllPartnerPromotePaging(request);
-            return Ok(products);
+            var partners = await _partnerService.GetAllPartnerPaging(request);
+            return Ok(partners);
         }
     }
 }

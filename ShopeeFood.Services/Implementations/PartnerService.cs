@@ -1,13 +1,6 @@
-﻿using ShopeeFood.DAL.EF.Context;
-using ShopeeFood.DAL.Models;
+﻿using ShopeeFood.DAL.Models;
 using ShopeeFood.DAL.Repositories.Contracts;
 using ShopeeFood.Services.Contracts;
-using ShopeeFood.Services.Models.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ShopeeFood.Services.Implementations
 {
@@ -25,9 +18,9 @@ namespace ShopeeFood.Services.Implementations
             return await _partnerRepository.GetAllByCategoryId();
         }
 
-        public async Task<PageResult<PartnerViewModel>> GetAllPartnerPromotePaging(GetPartnerRequest request)
+        public async Task<PageResult<PartnerViewModel>> GetAllPartnerPaging(GetPartnerRequest request)
         {
-            return await _partnerRepository.GetAllPartnerPromotePaging(request);
+            return await _partnerRepository.GetAllPartnerPaging(request);
         }
 
         public async Task<List<PartnerViewModel>> GetBySubCategoryId(int subCategoryId)

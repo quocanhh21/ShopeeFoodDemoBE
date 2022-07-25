@@ -1,11 +1,4 @@
-﻿using ShopeeFood.DAL.EF.Entities;
-using ShopeeFood.DAL.Models;
-using ShopeeFood.Services.Models.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ShopeeFood.DAL.Models;
 
 namespace ShopeeFood.Services.Contracts
 {
@@ -15,7 +8,7 @@ namespace ShopeeFood.Services.Contracts
 
         Task<List<PartnerViewModel>> GetBySubCategoryId(int subCategoryId);
 
-        Task<PageResult<PartnerViewModel>> GetAllPartnerPromotePaging(GetPartnerRequest request);
+        Task<PageResult<PartnerViewModel>> GetAllPartnerPaging(GetPartnerRequest request);
 
         //PagedViewModel<PartnerViewModel> GetAllByCategoryId(int catagoryId, int pageIndex, int pageSized);
 
