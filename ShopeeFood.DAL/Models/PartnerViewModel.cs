@@ -38,6 +38,8 @@ namespace ShopeeFood.DAL.Models
 
         public List<VoucherPartner> VoucherPartners { get; set; }
 
+        public string? VoucherName { get; set; }
+
         public int TypePartnerForeignKey { get; set; }
 
         public string TypePartner { get; set; }

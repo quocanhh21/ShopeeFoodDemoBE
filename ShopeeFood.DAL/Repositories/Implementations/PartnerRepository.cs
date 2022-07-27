@@ -89,8 +89,8 @@ namespace ShopeeFood.DAL.Repositories.Implementations
                 query = query.Where(x => request.DistrictId.Any(t => t == x.d.Id));
             }
 
-            //group by partner
-            var groupPartner = query.GroupBy(gr => new
+            //group by partner has item
+            var groupPartner =await query.GroupBy(gr => new
             {
                 gr.p.Id,
                 gr.p.PartnerName,
@@ -99,9 +99,7 @@ namespace ShopeeFood.DAL.Repositories.Implementations
                 nameDistrict = gr.p.District.Name,
                 gr.p.OpenTime,
                 gr.p.CloseTime,
-                nameType = gr.p.TypePartner.Name,
-                
-
+                nameType = gr.p.TypePartner.Name
             }).Select(s => new PartnerViewModel()
             {
                 Id = s.Key.Id,
@@ -111,16 +109,8 @@ namespace ShopeeFood.DAL.Repositories.Implementations
                 District = s.Key.nameDistrict,
                 OpenTime = s.Key.OpenTime,
                 CloseTime = s.Key.CloseTime,
-                TypePartner = s.Key.nameType,
-                
-            }).ToList();
-
-            ////filter promote partner
-            //if (request.IsPromote)
-            //{
-            //    var promotePartners = groupPartner.Any(x=>x.VoucherPartners.Count > 0);
-            //}
-
+                TypePartner = s.Key.nameType
+            }).ToListAsync();
 
             //paging
 
