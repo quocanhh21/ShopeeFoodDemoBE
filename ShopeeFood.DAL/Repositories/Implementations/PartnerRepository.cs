@@ -99,7 +99,8 @@ namespace ShopeeFood.DAL.Repositories.Implementations
                 nameDistrict = gr.p.District.Name,
                 gr.p.OpenTime,
                 gr.p.CloseTime,
-                nameType = gr.p.TypePartner.Name
+                nameType = gr.p.TypePartner.Name,
+                voucherName= gr.p.VoucherPartners
             }).Select(s => new PartnerViewModel()
             {
                 Id = s.Key.Id,
@@ -109,7 +110,8 @@ namespace ShopeeFood.DAL.Repositories.Implementations
                 District = s.Key.nameDistrict,
                 OpenTime = s.Key.OpenTime,
                 CloseTime = s.Key.CloseTime,
-                TypePartner = s.Key.nameType
+                TypePartner = s.Key.nameType,
+                VoucherPartners = s.Key.voucherName.ToList()
             }).ToListAsync();
 
             //paging
@@ -118,7 +120,6 @@ namespace ShopeeFood.DAL.Repositories.Implementations
 
             var data = groupPartner.Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize).ToList();
-
 
             //Select and projection
             var pagedResult = new PageResult<PartnerViewModel>()
