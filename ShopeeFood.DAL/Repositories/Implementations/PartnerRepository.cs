@@ -106,7 +106,8 @@ namespace ShopeeFood.DAL.Repositories.Implementations
                 gr.p.OpenTime,
                 gr.p.CloseTime,
                 nameType = gr.p.TypePartner.Name,
-                voucherName= (gr.p.VoucherPartners.Join() != null ) ? gr.p.VoucherPartners.Take(1) : "null"
+                voucherName=gr.p.VoucherPartners.Select(x=>x.Voucher.VoucherName).FirstOrDefault()
+                
             }).Select(s => new PartnerViewModel()
             {
                 Id = s.Key.Id,
@@ -117,7 +118,8 @@ namespace ShopeeFood.DAL.Repositories.Implementations
                 OpenTime = s.Key.OpenTime,
                 CloseTime = s.Key.CloseTime,
                 TypePartner = s.Key.nameType,
-                VoucherName = s.Key.voucherName
+                VoucherName= (s.Key.voucherName != null) ? s.Key.voucherName : s.Key.nameType
+
             }).ToListAsync();
 
             //paging
