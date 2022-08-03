@@ -28,8 +28,7 @@ namespace ShopeeFood.DAL.Repositories.Implementations
             { 
                 SortOrder= x.c.SortOrder,
                 CateName = x.c.CateName 
-            }
-            ).ToListAsync();
+            }).ToListAsync();
 
             return data;
         }
